@@ -1,0 +1,49 @@
+<scroll-view scroll-y class="scrollPage">
+<view class="UCenter-bg">
+    <image src="/images/clogo.png" class="png" mode="widthFix"></image>
+    <view class="text-xl">集卡TMS
+      <text class="text-df">v.01</text>
+    </view>
+    <view class="margin-top-sm">
+      <text>司机端</text>
+    </view>
+    <image src="https://image.weilanwl.com/gif/wave.gif" mode="scaleToFill" class="gif-wave"></image>
+  </view>
+  <view class="padding flex text-center text-grey bg-white shadow-warp">
+    <view class="flex flex-sub flex-direction solid-right">
+      <view class="text-xxl text-blue ">{{taskTotal}}</view>
+      <view class="margin-top-sm">
+        <text class="icon-deliver"></text> 任务</view>
+    </view>
+    <view class="flex flex-sub flex-direction solid-right">
+      <view class="text-xxl  text-green">{{completedTotal}}</view>
+      <view class="margin-top-sm">
+        <text class="icon-squarecheck"></text> 完成</view>
+    </view>
+    <view class="flex flex-sub flex-direction">
+      <view class="text-xxl text-orange">{{exTotal}}</view>
+      <view class="margin-top-sm">
+        <text class="icon-infofill"></text> 异常</view>
+    </view>
+  </view>
+  <view class="margin-30 cu-bar bg-white solid-bottom margin-top ">
+    <view class="action">
+      <text class="icon-title text-orange "></text> 我的任务
+    </view>
+    <view class="action">
+       
+    </view>
+  </view>
+ 
+  <view class="margin-30  cu-list grid col-{{gridCol}} no-border ">
+    <view class="cu-item" data-status="{{item.status}}" bindtap="tolist" wx:for="{{iconList}}" wx:key wx:if="{{index<gridCol*2}}">
+      <view class="icon-{{item.icon}} text-{{item.color}}">
+        <view class="cu-tag badge" wx:if="{{item.badge!=0}}">
+          <block wx:if="{{item.badge!=1}}">{{item.badge>99?"99+":item.badge}}</block>
+        </view>
+      </view>
+      <text>{{item.name}}</text>
+    </view>
+  </view>
+ 
+</scroll-view>

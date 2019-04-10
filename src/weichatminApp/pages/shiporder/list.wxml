@@ -1,0 +1,73 @@
+<scroll-view scroll-y="{{modalName==null}}" class="page {{modalName!=null?'show':''}}">
+  <cu-custom bgColor="bg-gradual-pink" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">运单信息</view>
+  </cu-custom>
+
+  <view class="cu-bar bg-white solid-bottom margin-top">
+    <view class="action">
+      <text class="icon-title text-orange "></text> 发运单
+    </view>
+    <view class="action">
+      <button class="cu-btn bg-green shadow" bindtap="showModal" data-target="gridModal">查询</button>
+    </view>
+  </view>
+  <view class="cu-modal {{modalName=='gridModal'?'show':''}}" bindtap="hideModal">
+    <view class="cu-dialog" catchtap>
+      <form>
+        <view class="cu-form-group">
+          <view class="title">派车类型</view>
+          <picker bindchange="PickerChange" value="{{index}}" range="{{picker}}">
+            <view class="picker">
+              {{index?picker[index]:'ALL'}}
+            </view>
+          </picker>
+        </view>
+        <view class="cu-form-group">
+          <view class="title">派车状态</view>
+          <picker bindchange="StatusPickerChange" value="{{index}}" range="{{statuspicker}}">
+            <view class="picker">
+              {{index?statuspicker[index]:'ALL'}}
+            </view>
+          </picker>
+        </view>
+        <view class="cu-form-group">
+          <view class="title">派车日期</view>
+          <picker mode="date" value="{{date}}" start="2018-01-01" end="2020-01-01" bindchange="DateChange">
+            <view class="picker">
+              {{date}}
+            </view>
+          </picker>
+        </view>
+      </form>
+    </view>
+  </view>
+  <view class="cu-list menu">
+    <view class="cu-item arrow" data-id="{{item.ShipOrderNo}}" bindtap='todetail' wx:for="{{rows}}" wx:key>
+      <view class="content">
+        <view class="text-gray text-lg">
+          <text class="text-grey">{{item.ShipOrderNo}}</text>
+        </view>
+        <view class="text-gray text-sm">
+          <text class="icon-deliver"> {{item.ZCPH}}|{{item.ZCBH}}</text>
+        </view>
+        <view class="text-gray text-sm">
+          <text class="icon-location"> {{item.ZQSDMS}}</text>
+        </view>
+        <view class="text-gray text-sm">
+          <text class="icon-location"> {{item.ZMDDMS}}</text>
+        </view>
+      </view>
+
+      <view class="action">
+        <view class="text-grey" style="text-align:right">{{item.ZDDPCSJ}}</view>
+        <view class="cu-tag round {{(item.ZPCLX=='0'|| item.ZPCLX=='1')?'bg-green':'bg-blue'}} sm">{{item.ZPCLXN}}</view>
+        <view class="cu-tag round bg-grey sm">{{item.ZCZTN}}</view>
+
+      </view>
+    </view>
+  </view>
+  <view class='cu-load load-modal' wx:if="{{loadModal}}">
+    <view class='gray-text'>加载中...</view>
+  </view>
+</scroll-view>

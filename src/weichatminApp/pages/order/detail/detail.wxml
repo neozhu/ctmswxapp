@@ -1,0 +1,88 @@
+<cu-custom bgColor="bg-gradual-pink" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">{{orderno}}</view>
+</cu-custom>
+<form>
+  <view class="cu-form-group margin-top">
+    <view class="title">订单编号</view>
+    <input placeholder="订单编号" value="{{order.TRQ_ID}}" disabled="true"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">业务类型</view>
+    <input placeholder="业务类型" value="{{order.TRQ_TYPE}}" disabled="true"></input>
+    <view class="title">操作类型</view>
+    <input placeholder="操作类型" value="{{order.ZCZLX}}" disabled="true"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">订单状态</view>
+    <input placeholder="订单状态" value="{{order.ZZT}}" disabled="true"></input>
+    <view class="title">接单日期</view>
+    <input placeholder="接单日期" value="{{order.ZJDRQ}}" disabled="true"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">集装箱号</view>
+    <input placeholder="集装箱号" value="{{order.TURES_ID}}" disabled="true"></input>
+    <view class="title">箱型</view>
+    <input placeholder="箱型" value="{{order.TURES_TCO}}" disabled="true"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">箱状态</view>
+    <input placeholder="箱状态" value="{{order.ZXZT}}" disabled="true"></input>
+    <view class="title">箱封号</view>
+    <input placeholder="箱封号" value="{{order.ZFH1}}" disabled="true"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">提单号</view>
+    <input placeholder="提单号" value="{{order.ZSBTDH}}" disabled="true"></input>
+    <view class="title">危险品</view>
+    <input placeholder="危险品" value="{{order.ZWXPDJ}}" disabled="true"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">件数</view>
+    <input placeholder="件数" value="{{order.QUA_PCS_VAL}}" disabled="true"></input>
+    <view class="title">毛重</view>
+    <input placeholder="毛重" value="{{order.PKGUN_WEI_VAL}}" disabled="true"></input>
+    <view class="title">体积</view>
+    <input placeholder="体积" value="{{order.GRO_VOL_VAL}}" disabled="true"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">提货地址</view>
+    <input placeholder="提货地址" value="{{order.ZTHDZMS}}" disabled="true"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">送货地址</view>
+    <input placeholder="送货地址" value="{{order.ZSHDZMS}}" disabled="true"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">提货备注</view>
+    <input placeholder="提货备注" value="{{order.ZTHYQBZL}}" disabled="true"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">送货备注</view>
+    <input placeholder="送货备注" value="{{order.ZSHYQBZL}}" disabled="true"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">装箱要求</view>
+    <input placeholder="装箱要求" value="{{order.ZZXYQBZL}}" disabled="true"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">计划提货日期</view>
+    <input placeholder="计划提货日期" value="{{order.ZFOJHTHRQZGRQS}}" disabled="true"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">计划送货日期</view>
+    <input placeholder="计划送货日期" value="{{order.ZJHSHRQ}}" disabled="true"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">发货单位</view>
+    <input placeholder="发货单位" value="{{order.ZFHDWMS}}" disabled="true"></input>
+  </view>
+  <view class="cu-form-group">
+    <view class="title">收货单位</view>
+    <input placeholder="收货单位" value="{{order.ZSHDWMS}}" disabled="true"></input>
+  </view>
+
+</form>
+<view class='cu-load load-modal' wx:if="{{loadModal}}">
+  <view class='gray-text'>加载中...</view>
+</view>

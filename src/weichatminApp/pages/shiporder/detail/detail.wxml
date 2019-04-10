@@ -1,0 +1,150 @@
+<cu-custom bgColor="bg-gradual-pink" isBack="{{true}}">
+  <view slot="backText">返回</view>
+  <view slot="content">{{shiporderno}}</view>
+</cu-custom>
+<map class="mapBox shadow" scale='10' polyline="{{polyline}}" circles="{{circles}}" show-compass="true" show-location="true" longitude="{{longitude}}" latitude="{{latitude}}">
+</map>
+<view class="margin-30 cu-bar bg-white solid-bottom margin-top">
+  <view class="action">
+    <text class="icon-title text-orange "></text> 发运单信息
+  </view>
+  <view class="action">
+
+  </view>
+</view>
+<view class="margin-30 cu-bar bg-white padding">
+  <block wx:if="{{shiporder.ZCZT==1}}">
+    <button class="cu-btn round shadow bg-green" bindtap='doprint'>
+      <text class="icon-deliver"></text> 接单
+    </button>
+  </block>
+  <block wx:if="{{shiporder.ZCZT==2}}">
+    <button class="cu-btn round shadow bg-green" bindtap='docompleted'>
+      <text class="icon-squarecheck"></text> 完成
+    </button>
+  </block>
+  <block wx:if="{{shiporder.ZCZT==3}}">
+    <button class="cu-btn round shadow bg-green" bindtap='uppod'>
+      <text class="icon-upload"></text> 上传POD
+    </button>
+  </block>
+  <block wx:if="{{shiporder.ZCZT==4}}">
+    <button class="cu-btn round shadow" disabled="true">
+      <text class="icon-upload"></text> 结案
+    </button>
+  </block>
+  <button class="cu-btn round shadow bg-orange" bindtap="showModal" data-target="DialogModal1">
+    <text class="icon-recharge"></text> 上传费用
+  </button>
+  <button class="cu-btn round shadow bg-red" bindtap="showModal" data-target="DialogModal2">
+    <text class="icon-warn">异常登记</text>
+  </button>
+</view>
+
+<view class="margin-30 cu-bar bg-white">
+  <form>
+    <view class="cu-form-group ">
+      <view class="title">发运单号</view>
+      <input placeholder="发运单号" value="{{shiporder.ShipOrderNo}}" disabled="true"></input>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">派车类型</view>
+      <input placeholder="派车类型" value="{{shiporder.ZPCLX}}" disabled="true"></input>
+      <view class="title">状态</view>
+      <input placeholder="状态" value="{{shiporder.ZCZTN}}" disabled="true"></input>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">调度员</view>
+      <input placeholder="调度员" value="{{shiporder.ZDDY}}" disabled="true"></input>
+      <view class="title">派车日期</view>
+      <input placeholder="派车日期" value="{{shiporder.ZDDPCSJ}}" disabled="true"></input>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">车牌号</view>
+      <input placeholder="车牌号" value="{{shiporder.ZCPH}}" disabled="true"></input>
+      <view class="title">车板号</view>
+      <input placeholder="车板号" value="{{shiporder.ZCBH}}" disabled="true"></input>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">起始地</view>
+      <input placeholder="起始地" value="{{shiporder.ZQSDMS}}" disabled="true"></input>
+    </view>
+    <view class="cu-form-group">
+      <view class="title">目的地</view>
+      <input placeholder="目的地" value="{{shiporder.ZMDDMS}}" disabled="true"></input>
+    </view>
+  </form>
+</view>
+<view class="margin-30 cu-bar bg-white solid-bottom margin-top">
+  <view class="action">
+    <text class="icon-title text-orange "></text>集装箱信息
+    <view class="cu-tag bg-orange radius">{{total}}</view>
+  </view>
+  <view class="action">
+
+  </view>
+</view>
+<view class="margin-30  bg-white solid-bottom ">
+  <view class="grid col-5">
+    <view class="     margin-xs  ">方向</view>
+    <view class="     margin-xs  ">集装箱号</view>
+    <view class="     margin-xs text-right ">箱型</view>
+    <view class="    margin-xs  text-right">箱状态</view>
+  </view>
+  <view class="grid col-5" wx:for="{{containers}}" wx:key>
+    <view class="  {{(item.Drirect=='0')?'bg-green':'bg-blue'}} cu-tag round margin-xs  ">{{(item.Drirect=='0')?'去程':'回程'}}</view>
+    <view class="margin-xs  ">{{item.TURES_ID}}</view>
+    <view class="margin-xs text-right ">{{item.TURES_TCO}}</view>
+    <view class="margin-xs  text-right">{{(item.ZXZT=='E')?'空箱':'重箱'}}</view>
+  </view>
+
+</view>
+<view class='cu-load load-modal' wx:if="{{loadModal}}">
+  <view class='gray-text'>加载中...</view>
+</view>
+
+<view class="cu-modal {{modalName=='DialogModal1'?'show':''}}">
+  <view class="cu-dialog">
+    <view class="cu-bar bg-white justify-end">
+      <view class="content">上传费用</view>
+      <view class="action" bindtap="hideModal">
+        <text class="icon-close text-red"></text>
+      </view>
+    </view>
+    <view>
+      <form>
+        <view class="cu-form-group">
+          <view class="title">费用名称</view>
+          <picker bindchange="PickerChange" value="{{index}}" range="{{freerange}}">
+            <view class="picker">
+              {{index?picker[index]:'过路过桥费'}}
+            </view>
+          </picker>
+        </view>
+        <view class="cu-form-group">
+          <view class="title">金额</view>
+          <input placeholder="发票金额">0.00</input>
+          <text class="icon-moneybag text-orange"></text>
+        </view>
+        <view class="cu-form-group">
+          <view class="grid col-4 grid-square flex-sub">
+            <view class="padding-xs bg-img" style="background-image:url({{imgList1[index]}})" wx:for="{{imgList1}}" wx:key="{{index}}" bindtap="ViewImage1" data-url="{{imgList1[index]}}">
+              <view class="cu-tag bg-red" catchtap="DelImg" data-index="{{index}}">
+                <text class="icon-close"></text>
+              </view>
+            </view>
+            <view class="padding-xs solids" bindtap="ChooseImage1" wx:if="{{imgList1.length<4}}">
+              <text class="icon-cameraadd"></text>
+            </view>
+          </view>
+        </view>
+      </form>
+    </view>
+    <view class="cu-bar bg-white justify-end">
+      <view class="action">
+        <button class="cu-btn line-green text-green" bindtap="hideModal">取消</button>
+        <button class="cu-btn bg-green margin-left" bindtap="confirmModal1">确定</button>
+      </view>
+    </view>
+  </view>
+</view>

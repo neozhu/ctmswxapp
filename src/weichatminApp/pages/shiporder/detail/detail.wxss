@@ -1,0 +1,15 @@
+map,.mapBox{
+  left: 0;
+  z-index: 99;
+  mix-blend-mode: screen;  
+  height: 100rpx;   
+}
+
+map,.mapBox{
+  width: 750rpx;
+  height: 400rpx;
+}
+view.margin-30{
+  margin-left: 30rpx;
+  margin-right: 30rpx;
+}

@@ -1,0 +1,64 @@
+<scroll-view scroll-y="{{modalName==null}}" class="page {{modalName!=null?'show':''}}">
+  <cu-custom bgColor="bg-gradual-pink" isBack="{{true}}">
+    <view slot="backText">返回</view>
+    <view slot="content">订单信息</view>
+  </cu-custom>
+
+  <view class="cu-bar bg-white solid-bottom margin-top">
+    <view class="action">
+      <text class="icon-title text-orange "></text> 运输计划
+    </view>
+    <view class="action">
+      <button class="cu-btn bg-green shadow" bindtap="showModal" data-target="gridModal">查询</button>
+    </view>
+  </view>
+  <view class="cu-modal {{modalName=='gridModal'?'show':''}}" bindtap="hideModal">
+    <view class="cu-dialog" catchtap>
+      <form>
+        <view class="cu-form-group">
+          <view class="title">业务类型</view>
+          <picker bindchange="PickerChange" value="{{index}}" range="{{picker}}">
+            <view class="picker">
+              {{index?picker[index]:'ALL'}}
+            </view>
+          </picker>
+        </view>
+        <view class="cu-form-group">
+          <view class="title">接单日期</view>
+          <picker mode="date" value="{{date}}" start="2018-01-01" end="2020-01-01" bindchange="DateChange">
+            <view class="picker">
+              {{date}}
+            </view>
+          </picker>
+        </view>
+      </form>
+    </view>
+  </view>
+  <view class="cu-list menu">
+    <view class="cu-item arrow" data-id="{{item.Id}}" bindtap='todetail' wx:for="{{rows}}" wx:key>
+
+      <view class="content">
+        <view class="text-gray text-lg">
+          <text class="text-grey">{{item.TRQ_ID}}</text>
+        </view>
+        <view class="text-gray text-sm">
+          <text class="icon-moreandroid "></text>
+
+          <text class="text-grey">{{item.TURES_ID}}|{{item.TURES_TCO}}</text>
+        </view>
+
+      </view>
+      <view class="action">
+        <view class="text-grey" style="text-align:right">{{item.ZJDRQ}}</view>
+
+        <view class="cu-tag round {{(item.TRQ_TYPE=='OI01'|| item.TRQ_TYPE=='OI02')?'bg-green':'bg-blue'}} sm">{{item.TRQ_TYPEN}}</view>
+        <view class="cu-tag round bg-red sm">{{item.ZCZLXN}}</view>
+        <view class="cu-tag round bg-grey sm">{{item.ZZTN}}</view>
+
+      </view>
+    </view>
+  </view>
+  <view class='cu-load load-modal' wx:if="{{loadModal}}">
+    <view class='gray-text'>加载中...</view>
+  </view>
+</scroll-view>
